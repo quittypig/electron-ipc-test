@@ -45,10 +45,10 @@ const createWindow = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-    const jsonFile = fs.readFileSync('./users.json', 'utf8')
-    let users = JSON.parse(jsonFile)
-
     createWindow()
+
+    const jsonFile = fs.readFileSync(path.join(__dirname, 'users.json'), 'utf8')
+    let users = JSON.parse(jsonFile)
 
     app.on('activate', () => {
         // On macOS it's common to re-create a window in the app when the
@@ -67,7 +67,7 @@ app.whenReady().then(() => {
     });
 
     ipcMain.on('save', (e) => {
-        fs.writeFileSync('./users.json', JSON.stringify(users))
+        fs.writeFileSync(path.join(__dirname, 'users.json'), JSON.stringify(users))
 
         e.reply('users', users);
     });
