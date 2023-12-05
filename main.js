@@ -5,6 +5,8 @@ const {app, BrowserWindow, ipcMain, webContents} = require('electron')
 const path = require('node:path')
 const fs = require("fs");
 const axios = require("axios");
+const { autoUpdater } = require("electron-updater");
+const log = require('electron-log')
 
 const createWindow = () => {
     // Create the browser window.
@@ -46,6 +48,8 @@ const createWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
     createWindow()
+
+    autoUpdater.checkForUpdates();
 
     const jsonFile = fs.readFileSync(path.join(__dirname, 'users.json'), 'utf8')
     let users = JSON.parse(jsonFile)
@@ -99,3 +103,21 @@ app.on('window-all-closed', () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
+autoUpdater.on('checking-for-update', () => {
+    log.info('업데이트 확인 중...');
+});
+autoUpdater.on('update-available', (info) => {
+    log.info('업데이트가 가능합니다.');
+});
+autoUpdater.on('update-not-available', (info) => {
+    log.info('현재 최신버전입니다.');
+});
+autoUpdater.on('error', (err) => {
+    log.info('에러가 발생하였습니다. 에러내용 : ' + err);
+});
+autoUpdater.on('download-progress', (progressObj) => {
+    let log_message = "다운로드 속도: " + progressObj.bytesPerSecond;
+    log_message = log_message + ' - 현재 ' + progressObj.percent + '%';
+    log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
+    log.info(log_message);
+})
