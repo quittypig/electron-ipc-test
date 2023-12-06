@@ -1,6 +1,6 @@
 {
   "name": "electron-ipc-test",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "main.js",
   "scripts": {
@@ -19,5 +19,26 @@
     "electron-log": "^5.0.1",
     "electron-updater": "^6.1.7",
     "fs": "^0.0.1-security"
+  },
+  "build": {
+    "productName": "quittypig_test",
+    "appId": "com.quittypig.electron",
+    "asar": true,
+    "mac": {
+      "target": [
+        "default"
+      ]
+    },
+    "dmg": {
+      "title": "test"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "directories": {
+      "output": "./dist/"
+    }
   }
 }
