@@ -1,10 +1,11 @@
 {
   "name": "electron-ipc-test",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "",
   "main": "main.js",
   "scripts": {
     "build:osx": "electron-builder --mac",
+    "build:win64": "electron-builder --win --x64",
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
