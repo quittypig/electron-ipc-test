@@ -1,6 +1,6 @@
 {
   "name": "electron-ipc-test",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "",
   "main": "main.js",
   "scripts": {
@@ -37,6 +37,15 @@
       "target": [
         "nsis"
       ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": false,
+      "createDesktopShortcut": true,
+      "perMachine": true,
+      "language": 1042,
+      "shortcutName": "electron-ipc-test",
+      "uninstallDisplayName": "electron-ipc-test"
     },
     "directories": {
       "output": "./dist/"
